@@ -8,6 +8,8 @@
 [] call compileFinal preprocessFileLineNumbers "client\playerActions\spawnSquad.sqf";
 [] call compileFinal preprocessFileLineNumbers "client\playerActions\showArsenal.sqf";
 [] call compileFinal preprocessFileLineNumbers "client\playerActions\redeploy.sqf";
+[] call compileFinal preprocessFileLineNumbers "client\playerActions\virtual_garage.sqf";
+[] call compileFinal preprocessFileLineNumbers "shared\common\common.sqf";
 
 [] spawn compileFinal preprocessFileLineNumbers "client\ui\factionKillCounter.sqf";
 

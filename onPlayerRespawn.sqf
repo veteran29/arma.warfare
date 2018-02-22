@@ -4,6 +4,7 @@ player enableFatigue false;
 [] call ShowArsenalAction;
 [] call AddHeloAction;
 [] call AddRedeployToHqAction;
+[] call ShowVirtualGarageAction;
 
 RemoveSquadMatesWhenPlayerDies = {
 	params ["_player"];
