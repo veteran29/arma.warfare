@@ -25,33 +25,26 @@ Your startbase consists of an ammobox, with the actions 'Request squad', 'Arsena
 
 Your base will also work as a spawnpoint for AI:
 
-Tier 0: Infantry will spawn regulary
+Tier 0: Infantry will spawn regulary here if no sectors are captured
 
 Tier 1: Infantry and light vehicles will spawn regulary
 
 Tier 2: Infantry, light vehicles and heavy vehicles will spawn regulary
 
-
-Empy vehicles for player use will also spawn:
-
-Tier 0 or higher: A transport helicopter will spawn in base
-
-Tier 1 or higher: A light vehichle will spawn in base
-
-Tier 2 or higher: A heavy vehichle will spawn in base
-
-Tier 3 or higher: A gunship will spawn in base
-
-
-There will always only exist one of each vehicle type available for the player per side. If any of these are destroyed they will
-respawn in the base after a certain time
-
 ### AI
 
+#### Defensive AI
 The AI that spawns in sectors will remain in sectors and protect them.
 
-The Ai that spawns in the starting base will move towards uncaptured sectors to capture them. They will also report enemy activity 
-to the mortar positions in captured sectors.
+#### Patrolling AI
+
+These groups will move slowly between captured sectors
+
+#### Attacking AI
+
+Attacking infantry groups will spawn at HQ first, but then spawn in your safe (no enemy withing a certain radius) captured sectors. Depending on tier, tanks and vehicles might also spawn. These will always spawn back in the base
+
+These groups will move towards different uncaptured sectors to try capture them.
 
 ##### Ai Gunship
 AI gunship will spawn with random intervals. How often is determined by tier.
@@ -68,15 +61,46 @@ A captured sector give +1 every 30 second to faction strength.
 
 Every sector will have an ammobox. If the sector belongs to your side you will have 'Request squad', 'Arsenal', 'Helo insertion' and 'Redeploy to HQ' actions available.
 
-All sectors will have a random number of mines scattered around them, so be careful
+### Cash system
 
-#### Sector defense
-Once a sector is taken, 5 soldiers will spawn and one mortar position. These will remain in the sector to defend it.
+Cash is required to buy infantry, vehicles and helicopters.
+Cash can be collected at the ammoboxes in sectors.
+
+If a sector changes owning faction the cash holdings will be reset to 0, if that side does not have a player. 
+
+That means you can capture a sector and get all the cash it has accumulated when being held by the enemy, but if you lose
+a sector to a faction that has no players that can collect the cash, the cash in that sector will be lost.
+
+When collecting cash the player holds the cash. On death the player will lose the cash.
+
+Cash can be stored in HQ, where it will be available to everyone. (But then it cannot be lost).
+
+Cash can be looted from incapacitated players
+
+You can also give cash to another player.
+
+#### Cash UI
+
+It will be visible on map how much cash your captured sectors hold, and also how much your side holds in the HQ
+
+#### Cash production
+
+Sectors will produce cash once held by a faction. 
+You can collect the money by going to the actionbox and do the action "Take cash".
+
+#### Mines
+
+All sectors will have a random number of mines scattered around them, so be careful
 
 ### Actions
 
-#### Request squad
-Gives you a random squad of 8. If you already have squad mates, it will reinforce your squad so you are a squad of 8 again. 
+#### Buy infantry, vehicles, and infantry
+
+At the base you can buy vehicles. Stand within 25 m of the ammobox and you will get the options to buy vehicles, helicopters and infantry.
+
+Infantry can also be bought at captured sectors.
+
+Some vehicles are only available once you reached certain tiers.
 
 #### Redeploy to HQ
 Send you back to your HQ. Your squad won't be teleported
@@ -136,17 +160,15 @@ An ammobox will spawn in its center så make sure its empty.
 
 Copy the starting base from the template mission, it should include:
 
-##### 2 grasscutters:
-###### \<prefix\>_light_vehicle_parking  
-###### \<prefix\>_heavy_vehicle_parking
+##### 1 grasscutter:
+###### \<prefix\>_vehicle  
   
-This is where empty vehicles for players will spawn  
+This is where empty vehicles bought by players will spawn  
 
-##### 2 helipads
-###### \<prefix\>_transport_helipad  
-###### \<prefix\>_battle_helipad
+##### 1 helipad
+###### \<prefix\>_helicopter
 
-This is where empty helicopters for players will spawn  
+This is where empty helicopters bought by players spawn  
 
 ##### 2 respawn points
 ###### \<prefix\>_ground_respawn
@@ -162,7 +184,6 @@ Use delta, charlie and alpha. On mission start each faction will be assigned on 
 ## Planned features
 
 ##### Different infantry for different tiers
-##### Redeploy to captured sectors 
 
 
 
