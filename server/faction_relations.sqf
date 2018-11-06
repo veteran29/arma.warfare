@@ -1,4 +1,4 @@
-setup_faction_relations = {
+AW_setup_faction_relations = {
 	EAST setFriend [WEST, 0];
 	WEST setFriend [EAST, 0];
 

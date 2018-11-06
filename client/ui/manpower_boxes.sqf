@@ -1,4 +1,4 @@
-create_manpower_markers = {
+AW_create_manpower_markers = {
 	params ["_boxes"];
 	
 	{
@@ -9,11 +9,11 @@ create_manpower_markers = {
 	} forEach _boxes;
 };
 
-update_manpower_markers = {
+AW_update_manpower_markers = {
 	params ["_boxes"];
 
 	{
-		private _side = _x getVariable owned_by;
+		private _side = _x getVariable AW_owned_by;
 		private _marker_name = format["%1-%2", "manpower-box", _forEachIndex];
 
 		if (_side isEqualTo playerSide) then {
@@ -36,13 +36,13 @@ update_manpower_markers = {
 	} forEach _boxes;
 };
 
-show_manpower_markers = {
+AW_show_manpower_markers = {
 	_manpower_storage_boxes = allMissionObjects ammo_box;
-	[_manpower_storage_boxes] call create_manpower_markers;
+	[_manpower_storage_boxes] call AW_create_manpower_markers;
 	_side = playerSide;
 
 	while {true} do {
-		[_manpower_storage_boxes] call update_manpower_markers;
+		[_manpower_storage_boxes] call AW_update_manpower_markers;
 		sleep 2;
 	};
 };

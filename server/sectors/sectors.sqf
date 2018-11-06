@@ -4,7 +4,7 @@ add_sector_box = {
 	_pos = _sector getVariable pos;	 
 	_ammo_box = ammo_box createVehicle (_pos);	
 	_sector setVariable [box, _ammo_box];
-	_ammo_box setVariable [owned_by, civilian, true];	
+	_ammo_box setVariable [AW_owned_by, civilian, true];	
 	_ammo_box setVariable [manpower, 0, true];
 	_ammo_box setVariable ["sector", true, true];
 };
@@ -22,7 +22,7 @@ initialize_sectors = {
 			_sector = createGroup sideLogic;
 			_sector setVariable [pos, getMarkerPos _x];
 			_sector setVariable [marker, _x];
-			_sector setVariable [owned_by, civilian];
+			_sector setVariable [AW_owned_by, civilian];
 			_sector setVariable [sector_name, _second_string];
 
 			[_sector] call draw_sector;
@@ -99,7 +99,7 @@ get_other_sectors = {
 	sectors - (_side call get_owned_sectors);
 };
 
-find_closest_sector = {
+AW_find_closest_sector = {
 	params ["_sectors", "_pos"];
 
 	_current_sector = _sectors select 0;
@@ -123,7 +123,7 @@ find_closest_friendly_sector = {
 	params ["_side", "_pos"];
 	
 	private _sectors = [_side] call get_owned_sectors;	
-	[_sectors, _pos] call find_closest_sector;
+	[_sectors, _pos] call AW_find_closest_sector;
 };
 
 find_enemy_sectors = {

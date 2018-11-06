@@ -4,7 +4,7 @@ get_respawn = {
 };
 
 add_respawn_position = {
-	params ["_sector"];
+	params ["_sector", ["_side", nil, [sideEmpty]]];
 			
 	[_sector] call remove_respawn_position;
 	_respawn = [_side, _sector getVariable pos] call BIS_fnc_addRespawnPosition;
@@ -22,7 +22,7 @@ remove_respawn_position = {
 add_initial_respawn_positions = {
 	params ["_side"];
 
-	private _respawn_marker = [_side, respawn_ground] call get_prefixed_name;
+	private _respawn_marker = [_side, respawn_ground] call AW_get_prefixed_name;
 	private _pos = getMarkerPos _respawn_marker;
 	
 	[_side, _pos] call BIS_fnc_addRespawnPosition;	

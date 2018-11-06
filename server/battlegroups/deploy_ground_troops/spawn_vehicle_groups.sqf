@@ -11,7 +11,7 @@ add_soldiers_to_cargo = {
 
 	if(_cargo > 0) then {
 
-		_soldiers = [[0,0,0], _side, _cargo, false] call spawn_infantry;	
+		_soldiers = [[0,0,0], _side, _cargo, false] call AW_spawn_infantry;	
 
 		{
 			_x moveInCargo _vehicle;
@@ -50,7 +50,7 @@ try_find_unoccupied_nearby_road = {
 find_direction_towards_closest_sector = {
 	params ["_pos"];
 	
-	private _sector = [sectors, _pos] call find_closest_sector;
+	private _sector = [sectors, _pos] call AW_find_closest_sector;
 	private _sector_pos = _sector getVariable pos;
 	_pos getDir _sector_pos;
 };
@@ -77,8 +77,8 @@ spawn_vehicle_group = {
 spawn_random_vehicle_group = {
 	params ["_side", "_can_spawn"];	
 		
-	private _pos = getMarkerPos ([_side, respawn_ground] call get_prefixed_name);
-	private _tier = [_side] call get_tier;
+	private _pos = getMarkerPos ([_side, respawn_ground] call AW_get_prefixed_name);
+	private _tier = [_side] call AW_get_tier;
 	private _rnd = random 100;
 
 	if (_tier >= 2 && {_rnd < (100 / 3)}) exitWith {
@@ -98,7 +98,7 @@ spawn_random_vehicle_group = {
 spawn_vehicle_groups = {
 	params ["_side"];
 	private _unit_count = _side call count_battlegroup_units;	
-	private _strength = _side call get_strength;
+	private _strength = _side call AW_get_strength;
 	private _can_spawn = (unit_cap - _unit_count) min (_side call get_unused_strength); 
 
 	if (_can_spawn > (squad_cap / 2) || (_strength == _can_spawn)) exitWith {

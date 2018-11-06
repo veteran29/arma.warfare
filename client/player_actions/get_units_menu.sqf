@@ -1,4 +1,4 @@
-remove_all_options = {
+AW_remove_all_options = {
 	params ["_box"];
 	
 	private _options = _box getVariable ["menu", []];
@@ -10,26 +10,26 @@ remove_all_options = {
 	_box setVariable ["menu", []];
 };
 
-create_soldier = {
+AW_create_soldier = {
 	params ["_group", "_class_name"];
-	_class_name createUnit[getPos player, _group, "", ([] call get_rank_skill)];
+	_class_name createUnit[getPos player, _group, "", ([] call AW_get_rank_skill)];
 };
 
-get_infantry = {
+AW_get_infantry = {
 	params ["_class_name"];
 	_group = group player;
 	_group_count = {alive _x} count units _group;
 	_numberOfSoldiers = squad_size - _group_count;
 
 	if (_numberOfSoldiers > 0) exitWith {
-		[_group, _class_name] call create_soldier;			
+		[_group, _class_name] call AW_create_soldier;			
 		[_group] remoteExec ["add_battle_group", 2];
 	};
 
 	systemChat "You have the maximum allowed amount of people";		
 };
 
-get_vehicle = {
+AW_get_vehicle = {
 	params ["_base_marker", "_class_name", "_penalty"];
 
 	private _pos = getPos _base_marker;
@@ -40,13 +40,13 @@ get_vehicle = {
 		_veh setDir (getDir _base_marker);
 		_veh setVariable ["penalty", [playerSide, _penalty], true];
 
-		[_veh] call remove_vehicle_action;
+		[_veh] call AW_remove_vehicle_action;
 	}; 
 	
 	systemChat format["Something is obstructing the %1 respawn area", _type];
 };
 
-list_options = {
+AW_list_options = {
 	params ["_type", "_priority", "_box"];
 
 	private _side = side player;
@@ -65,24 +65,24 @@ list_options = {
 	{
 		private _class_name = _x select 0;
 		private _penalty = _x select 1;
-		private _name = _class_name call get_vehicle_display_name;		
+		private _name = _class_name call AW_get_vehicle_display_name;		
 
-		_sub_options pushBack (_box addAction [[_name, 2] call addActionText, {
+		_sub_options pushBack (_box addAction [[_name, 2] call AW_addActionText, {
 			private _params = _this select 3;
 			private _class_name = _params select 0;
 			private _penalty = _params select 1;
 			private _type = _params select 2;
 			private _box = _params select 3;
 
-			[_box] call remove_all_options;
+			[_box] call AW_remove_all_options;
 
 			if(_type isEqualTo infantry) then {
-				[_class_name] call get_infantry;
+				[_class_name] call AW_get_infantry;
 			} else {
-				private _base_marker_name = [side player, _type] call get_prefixed_name;
+				private _base_marker_name = [side player, _type] call AW_get_prefixed_name;
 				private _base_marker = missionNamespace getVariable _base_marker_name;
 
-				[_base_marker, _class_name, _penalty] call get_vehicle;
+				[_base_marker, _class_name, _penalty] call AW_get_vehicle;
 			};
 		}, [_class_name, _penalty, _type, _box], (_priority - 1), false, true, "", '', 10]);
 
@@ -91,12 +91,12 @@ list_options = {
 	_box setVariable ["menu", _sub_options];
 };
 
-create_menu = {
+AW_create_menu = {
 	params ["_box", "_title", "_type", "_priority", "_disable_on_enemies_nearby"];
 
 	_box setVariable [format["Menu_%1", _title], false];	
 
-	_box addAction [[_title, 0] call addActionText, {
+	_box addAction [[_title, 0] call AW_addActionText, {
 		params ["_target", "_caller", "_actionId", "_arguments"];
 
 		private _type = _arguments select 0;
@@ -107,18 +107,18 @@ create_menu = {
 
 		if(_disable_on_enemies_nearby && {[side player, getPos _box] call any_enemies_in_sector}) exitWith { 
 			systemChat "Cannot spawn units when enemies nearby";
-		};			
+		};
 
-		[_box] call remove_all_options;
+		[_box] call AW_remove_all_options;
 
 		private _open = _box getVariable format["Menu_%1", _title];	
 		
 		if(!_open) then {
-			[_type, _priority, _box] call list_options;
+			[_type, _priority, _box] call AW_list_options;
 			_box setVariable [format["Menu_%1", _title], true];	
 		} else {
 			_box setVariable [format["Menu_%1", _title], false];	
 		}
-	}, [_type, _priority, _title, _box, _disable_on_enemies_nearby], _priority, false, false, "", '[_target, _this] call owned_box', 10]	
+	}, [_type, _priority, _title, _box, _disable_on_enemies_nearby], _priority, false, false, "", '[_target, _this] call AW_owned_box', 10]
 };
 

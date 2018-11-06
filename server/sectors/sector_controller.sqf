@@ -44,12 +44,12 @@ lose_sector = {
 change_sector_ownership = {
 	params ["_sector", "_new_owner"];
 
-	_old_owner = _sector getVariable owned_by;
-	_sector setVariable [owned_by, _new_owner, true];
+	_old_owner = _sector getVariable AW_owned_by;
+	_sector setVariable [AW_owned_by, _new_owner, true];
 	_sector call draw_sector;
 
 	_ammo_box = _sector getVariable box;		
-	_ammo_box setVariable [owned_by, _new_owner, true];
+	_ammo_box setVariable [AW_owned_by, _new_owner, true];
 
 	if (!(_old_owner isEqualTo civilian)) then {
 		_sector call remove_respawn_position;	
@@ -57,7 +57,7 @@ change_sector_ownership = {
 	};
 
 	if(!(_new_owner isEqualTo civilian)) then {
-		[_sector] call add_respawn_position;		
+		[_sector, _new_owner] call add_respawn_position;		
 		[_new_owner, _sector] call add_sector;
 	};
 
@@ -69,10 +69,10 @@ initialize_sector_control = {
 	
 	private _pos = _sector getVariable pos;
 	private _counter = 0;
-	private _current_faction = _sector getVariable owned_by;
+	private _current_faction = _sector getVariable AW_owned_by;
 
 	while {true} do {	
-		private _owner = _sector getVariable owned_by;
+		private _owner = _sector getVariable AW_owned_by;
 
 		if (_owner isEqualTo civilian) then {
 			private _units = [_sector] call get_all_units_in_sector;

@@ -1,5 +1,5 @@
 spawn_defense_vehicle = {
-	params ["_group"];
+	params ["_group", "_pos"];
 
 	private _rnd = random 100;
 

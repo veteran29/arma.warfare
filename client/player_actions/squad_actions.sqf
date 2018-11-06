@@ -11,7 +11,7 @@ empty_squad = {
 };
 
 join_squad = {  
-  player addAction [["Join squad", 0] call addActionText, {    
+  player addAction [["Join squad", 0] call AW_addActionText, {    
 		private _group = group cursorTarget;
 
 		private _player_group = group player;	
@@ -28,7 +28,7 @@ join_squad = {
 
 
 leave_squad = {  
-  	player addAction [["Leave squad", 0] call addActionText, {
+  	player addAction [["Leave squad", 0] call AW_addActionText, {
 		private _current_group = group player;
 		[player] join grpNull;
 

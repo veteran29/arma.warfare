@@ -1,5 +1,5 @@
 spawn_static = {
-	params ["_pos", "_side"];
+	params ["_pos", "_side", "_sector"];
 
 	private _orientation = random 360;	
 	private _type = selectRandom (missionNamespace getVariable format["%1_static", _side]);

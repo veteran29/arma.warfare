@@ -14,7 +14,7 @@ pick_soldiers = {
 	_squad; 
 };
 
-spawn_infantry = {
+AW_spawn_infantry = {
 	params ["_pos", "_side", "_number", "_dynamicSimulation"];
 
 	private _squad = [_side, _number] call pick_soldiers;

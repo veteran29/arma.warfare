@@ -25,8 +25,8 @@ check_houses_to_populate = {
 	{
 		if ((floor random 2) == 0) then {
 			private _house = _x;
-			private _sector = [sectors, getPos _house] call find_closest_sector;
-			private _side = _sector getVariable owned_by;
+			private _sector = [sectors, getPos _house] call AW_find_closest_sector;
+			private _side = _sector getVariable AW_owned_by;
 
 			if([_house, _player, _sector, _side] call house_can_be_populated) then {							
 				[_side, _house] spawn populate_house;			
@@ -48,7 +48,7 @@ populate_house = {
 
 	if(_random_number_of_soldiers < 1) exitWith {};
 
-	private _group = [[0,0,0], _side, _random_number_of_soldiers, true] call spawn_infantry;
+	private _group = [[0,0,0], _side, _random_number_of_soldiers, true] call AW_spawn_infantry;
 	_group setBehaviour "SAFE";
 
 	private _positions = [];

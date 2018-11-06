@@ -2,13 +2,13 @@
 spawn_base_ammobox = {
 	params ["_side"];
 
-	private _marker = [_side, respawn_ground] call get_prefixed_name;	
+	private _marker = [_side, respawn_ground] call AW_get_prefixed_name;	
 	private _pos = getMarkerPos _marker;	 
 	private _ammo_box = ammo_box createVehicle (_pos);
 
 	_ammo_box setVariable ["HQ", true, true];
 
-	_ammo_box setVariable [owned_by, _side, true];	
+	_ammo_box setVariable [AW_owned_by, _side, true];	
 };
 
 initialize_bases = {

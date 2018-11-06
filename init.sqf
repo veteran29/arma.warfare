@@ -30,10 +30,10 @@ player setVariable ["kills", 0];
 [] call compileFinal preprocessFileLineNumbers "client\ui\faction_stat_ui.sqf";
 
 [] spawn show_friendly_markers;
-[] spawn show_manpower_markers;
-[] spawn show_ui;
-[] spawn calculate_rank_and_skill;
-[] spawn initialize_ammo_boxes;
+[] spawn AW_show_manpower_markers;
+[] spawn AW_show_ui;
+[] spawn AW_calculate_rank_and_skill;
+[] spawn AW_initialize_ammo_boxes;
 
-loaded_event = addMissionEventHandler ["Loaded",{ [] spawn show_ui; }];
+loaded_event = addMissionEventHandler ["Loaded",{ [] spawn AW_show_ui; }];
 

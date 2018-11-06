@@ -2,11 +2,11 @@ player enableStamina false;
 
 [] spawn join_squad;
 [] spawn leave_squad;
-[] spawn add_give_manpower_to_player_action;
-[] spawn add_take_manpower_from_player_action;
+[] spawn AW_add_give_manpower_to_player_action;
+[] spawn AW_add_take_manpower_from_player_action;
 
-["Request helicopter pick-up", helicopter, 95] spawn show_order_taxi;
-["Request vehicle pick-up", vehicle1, 93] spawn show_order_taxi;
+["Request helicopter pick-up", helicopter, 95] spawn AW_show_order_taxi;
+["Request vehicle pick-up", vehicle1, 93] spawn AW_show_order_taxi;
 
 remove_squad_mates_on_death = {
 	params ["_player"];
@@ -18,7 +18,7 @@ remove_squad_mates_on_death = {
 		[player] joinSilent _new_group;		
 	};
 
-	[0.5, _group] spawn adjust_skill;
+	[0.5, _group] spawn AW_adjust_skill;
 };
 
 reset_player_stats = {

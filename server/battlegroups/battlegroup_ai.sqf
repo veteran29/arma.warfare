@@ -128,14 +128,14 @@ find_air_target = {
 	private _unsafe_sectors = [_side] call get_unsafe_sectors;
 
 	if ((count _unsafe_sectors) > 0) exitWith {
-		[_unsafe_sectors, _pos] call find_closest_sector;
+		[_unsafe_sectors, _pos] call AW_find_closest_sector;
 	}; 
 
 	if((count _enemy_sectors) > 0) exitWith { 
-		[_enemy_sectors, _pos] call find_closest_sector;
+		[_enemy_sectors, _pos] call AW_find_closest_sector;
 	}; 
 
-	[sectors, _pos] call find_closest_sector;
+	[sectors, _pos] call AW_find_closest_sector;
 };
 
 ground_group_ai = {
@@ -148,11 +148,11 @@ ground_group_ai = {
 	private _sectors = _sectors + _unsafe_sectors;
 
 	private _target = if((count _sectors) > 0) then { 
-			[_sectors, _pos] call find_closest_sector;
+			[_sectors, _pos] call AW_find_closest_sector;
 		} else {
-			[sectors, _pos] call find_closest_sector;		
+			[sectors, _pos] call AW_find_closest_sector;		
 		};
 	
 	[_target, _group] spawn move_to_sector;
-	[_group] spawn report_casualities_over_radio;
+	[_group] spawn AW_report_casualities_over_radio;
 };

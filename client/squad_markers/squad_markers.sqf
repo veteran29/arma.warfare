@@ -4,7 +4,7 @@ close_to_any_owned_sectors = {
 	_is_close = 999999;
 
 	{
-		if((_x getVariable owned_by) isEqualTo playerSide) then {
+		if((_x getVariable AW_owned_by) isEqualTo playerSide) then {
 
 			_is_close = _is_close min ((getPosWorld _x) distance2D _pos);
 		};
@@ -52,7 +52,7 @@ get_unit_marker_text = {
 
 	if (_is_veh) exitWith {
 		private _class_name = typeOf _veh;
-		private _veh_name = _class_name call get_vehicle_display_name;
+		private _veh_name = _class_name call AW_get_vehicle_display_name;
 		format["%1 - %2", _group, _veh_name];
 	};
 

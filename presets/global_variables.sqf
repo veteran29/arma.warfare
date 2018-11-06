@@ -1,5 +1,5 @@
-owned_by = "owned_by";
-sector_prefix = "sector_";
+AW_owned_by = "AW_owned_by";
+AW_sector_prefix = "AW_sector_";
 pos = "pos";
 marker = "marker";
 artillery = "artillery";
@@ -32,6 +32,7 @@ factions = [west, east, independent];
 show_all = false;
 max_tier = 2;
 capture_time = 60;
+sectors = [];
 
 guer_faction_name = "The resistance";
 west_faction_name = "Nato";

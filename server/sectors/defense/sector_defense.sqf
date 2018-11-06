@@ -2,13 +2,13 @@ spawn_sector_defense = {
 	params ["_sector"];
 
 	private _pos = _sector getVariable pos;
-	private _current_faction = _sector getVariable owned_by; 
+	private _current_faction = _sector getVariable AW_owned_by; 
 	private _sector_defense = nil;
 	private _static_defense = nil;
 	private _sleep = 1;
 
 	while {true} do {		
-		private _faction = _sector getVariable owned_by; 
+		private _faction = _sector getVariable AW_owned_by; 
 
 		if(!(_faction isEqualTo civilian) && {!([_faction, _pos] call any_enemies_in_sector)}) then {
 		
@@ -26,13 +26,13 @@ spawn_sector_defense = {
 						_sector_defense = [_pos, _current_faction] call spawn_defensive_squad;						
 					} else {
 						if({alive _x} count units _sector_defense < (defender_cap / 2)) then {
-							[_pos, _sector_defense] call spawn_reinforcments;
+							[_pos, _sector_defense, _sector] call spawn_reinforcments;
 						};		
 					};
 				};
 
 				if(isNil "_static_defense" || {!([_static_defense] call static_alive)}) then {
-					_static_defense = [_pos, _current_faction] call spawn_static;					
+					_static_defense = [_pos, _current_faction, _sector] call spawn_static;					
 				};				
 
 			} else {

@@ -1,13 +1,13 @@
 spawn_defensive_squad = {
 	params ["_pos", "_side"];
 
-	private _number_of_soldiers = defender_cap call calc_number_of_soldiers;
-    private _group = [[_pos select 0, _pos select 1, 3000], _side, _number_of_soldiers, true] call spawn_infantry;
+	private _number_of_soldiers = defender_cap call AW_calc_number_of_soldiers;
+    private _group = [[_pos select 0, _pos select 1, 3000], _side, _number_of_soldiers, true] call AW_spawn_infantry;
 	
 	[_group, _pos] call place_defensive_soldiers;
 	[_group] call remove_nvg_and_add_flash_light;
 
-	[_group] call spawn_defense_vehicle;
+	[_group, _pos] call spawn_defense_vehicle;
 
     _group setBehaviour "SAFE";
 	_group setVariable [defense, true];
@@ -50,23 +50,23 @@ get_positions_to_populate = {
 	_positions call BIS_fnc_arrayShuffle;
 };
 
-calc_number_of_soldiers = {
+AW_calc_number_of_soldiers = {
 	params ["_soldier_cap"];
 	floor random [_soldier_cap / 2, _soldier_cap / 1.5, _soldier_cap];
 };
 
 spawn_reinforcments = {
-	params ["_pos", "_group"];
+	params ["_pos", "_group", "_sector"];
 	
 	private _side = side _group;
     private _group_count = {alive _x} count units _group;
 
-	private _new_soldiers = 0 max ((defender_cap call calc_number_of_soldiers) - _group_count);
+	private _new_soldiers = 0 max ((defender_cap call AW_calc_number_of_soldiers) - _group_count);
 
 	if(_new_soldiers < 1) exitWith {};
 
     private _pos = _sector getVariable pos;	
-    private _tmp_group = [[_pos select 0, _pos select 1, 3000], _side, _new_soldiers, true] call spawn_infantry;
+    private _tmp_group = [[_pos select 0, _pos select 1, 3000], _side, _new_soldiers, true] call AW_spawn_infantry;
 	
 	[_tmp_group, _pos] call place_defensive_soldiers;
 

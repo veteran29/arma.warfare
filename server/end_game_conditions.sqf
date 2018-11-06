@@ -4,7 +4,7 @@ check_if_lost = {
 	params ["_side"];
 	private _lost = false;
 
-	if(_side call get_strength <= 0 && _side call get_income == 0) then {
+	if(_side call AW_get_strength <= 0 && _side call get_income == 0) then {
 
 		_players = _side countSide allPlayers;
 
@@ -35,5 +35,5 @@ end_game_conditions_check = {
 		
 		sleep 10;
 	};
-	[active_factions] remoteExec ["end_mission"];
+	[active_factions] remoteExec ["AW_end_mission"];
 };

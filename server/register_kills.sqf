@@ -42,11 +42,11 @@ induce_lost_vehicle_penalty = {
 		private _side = _penalty select 0;
 		private _penalty_size = _penalty select 1;
 
-		_faction_strength = _side call get_strength;
+		_faction_strength = _side call AW_get_strength;
 		_new_faction_strength = _faction_strength - _penalty_size;
 		[_side, _new_faction_strength] call set_strength;
 
-		private _veh_name = (typeOf _victim) call get_vehicle_display_name;
+		private _veh_name = (typeOf _victim) call AW_get_vehicle_display_name;
 
 		private _msg = format["We lost %1 manpower points due to the loss of %2", _penalty_size, _veh_name];
 		
@@ -58,9 +58,9 @@ report_lost_vehicle = {
 	params ["_victim", "_killer"];
 	
 	if(count (crew _victim) > 0) then {
-		private _veh_name = (typeOf _victim) call get_vehicle_display_name;
+		private _veh_name = (typeOf _victim) call AW_get_vehicle_display_name;
 		private _pos = getPosWorld _victim;
-		private _closest_sector = [sectors, _pos] call find_closest_sector;
+		private _closest_sector = [sectors, _pos] call AW_find_closest_sector;
 		private _sector_pos = _closest_sector getVariable pos;
 		private _distance = floor(_sector_pos distance2D _pos);
 		private _location = [_closest_sector getVariable sector_name] call replace_underscore;
@@ -103,13 +103,13 @@ register_kill = {
 		};
 
 		if ((isPlayer _killer)) then {
-			[] remoteExec ["increment_player_kill_counter", _killer];
+			[] remoteExec ["AW_increment_player_kill_counter", _killer];
 		};
 
 		if (_victim_side in factions) then {
 			_death_penalty = ((_victim_side countSide allPlayers) + 1) min 2;
 
-			_faction_strength = _victim_side call get_strength;
+			_faction_strength = _victim_side call AW_get_strength;
 			_new_faction_strength = if(isPlayer _victim) then { _faction_strength - (5 max (_faction_strength / 10)); } else { _faction_strength - _death_penalty };		
 			[_victim_side, _new_faction_strength] call set_strength;
 		};

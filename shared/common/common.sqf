@@ -9,11 +9,11 @@ any_units_to_close = {
 check_if_player_already_in_hq = {
   params ["_player"];
 
-  private _pos = getMarkerPos ([side _player, respawn_ground] call get_prefixed_name);
+  private _pos = getMarkerPos ([side _player, respawn_ground] call AW_get_prefixed_name);
   (getPos _player) distance _pos > 25; 
 };
 
-addActionText = {
+AW_addActionText = {
   params ["_text", "_level"];
 
   private _indentation = "";
@@ -31,7 +31,7 @@ get_units_based_on_tier = {
 	params ["_side", "_type"];
 
 	private _options = [];
-	private _tier = (_side call get_tier);
+	private _tier = (_side call AW_get_tier);
 
 	for "_x" from 0 to _tier step 1 do {
 		_options = _options + (missionNamespace getVariable [format["%1_%2_tier_%3", _side, _type, _x], []]);
@@ -62,7 +62,7 @@ remove_nvg_and_add_flash_light_unit = {
 		//_unit enableGunLights "forceon";
 };
 
-calc_number_of_soldiers = {
+AW_calc_number_of_soldiers = {
 	params ["_soldier_cap"];
 	floor random [_soldier_cap / 2, _soldier_cap / 1.5, _soldier_cap];
 };
@@ -98,7 +98,7 @@ report_time = {
 
 
 
-get_vehicle_display_name = {
+AW_get_vehicle_display_name = {
     params ["_class_name"];
 
     private _cfg  = (configFile >>  "CfgVehicles" >>  _class_name);
@@ -110,7 +110,7 @@ get_vehicle_display_name = {
 	_class_name;
 };
 
-adjust_skill = {
+AW_adjust_skill = {
 	params ["_skill", "_squad"];
 
 	{		

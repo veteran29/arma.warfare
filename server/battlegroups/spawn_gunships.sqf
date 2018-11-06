@@ -14,7 +14,7 @@ spawn_gunships = {
 	params ["_side"];
 	
 	while {true} do {
-		private _tier = [_side] call get_tier;
+		private _tier = [_side] call AW_get_tier;
 		private _wait_time = tier_base_gunship_respawn_time + (random (missionNamespace getVariable format["tier_%1_gunship_respawn_time", _tier]));
 		
 		sleep _wait_time;
@@ -37,10 +37,10 @@ spawn_gunship_group = {
 	if((_options isEqualTo [])) exitWith {};
 
 	private _gunship = (selectRandom _options) select 0; 
-	private _gunship_name = _gunship call get_vehicle_display_name;
+	private _gunship_name = _gunship call AW_get_vehicle_display_name;
 
 	[_side, format["Sending a %1 your way. ETA 2 minutes!", _gunship_name]] call HQ_report;
 	sleep 120;
 
-	[_side, _gunship] call spawn_helicopter;
+	[_side, _gunship] call AW_spawn_helicopter;
 };

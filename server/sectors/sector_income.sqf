@@ -3,7 +3,7 @@ sector_manpower_generation = {
             sleep 60;
             {
                   private _sector = _x;
-                  private _side = _sector getVariable owned_by;
+                  private _side = _sector getVariable AW_owned_by;
 
                   if(_side in factions) then {
                         private _ammo_box = _sector getVariable box;
@@ -30,7 +30,7 @@ reset_sector_manpower = {
 get_additional_income_based_on_stationed_players = {
       params ["_sector"];
       private _pos = _sector getVariable pos;
-      private _side = _sector getVariable owned_by;
+      private _side = _sector getVariable AW_owned_by;
       private _total_factor = 0;
 
       { 

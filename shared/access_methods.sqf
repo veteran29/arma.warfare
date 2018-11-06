@@ -1,4 +1,4 @@
-get_prefixed_name = {
+AW_get_prefixed_name = {
 	params ["_side", "_suffix"];
 	format["%1_%2", missionNamespace getVariable format["%1_prefix", _side], _suffix];
 };
@@ -8,22 +8,22 @@ get_tier_bound = {
 	_num * (starting_strength / 10);
 };
 
-set_tier_progress = {
+AW_set_tier_progress = {
 	params ["_side", "_value"];
 	missionNamespace setVariable [format ["%1_tier_prog",  _side], _value, true];
 };
 
-get_tier_progress = {
+AW_get_tier_progress = {
 	params ["_side"];
 	missionNamespace getVariable format ["%1_tier_prog",  _side];
 };
 
-get_tier = {
+AW_get_tier = {
 	params ["_side"];
 	missionNamespace getVariable format ["%1_tier",  _side];
 };
 
-set_tier = {
+AW_set_tier = {
 	params ["_side", "_value"];
 	missionNamespace setVariable [format ["%1_tier",  _side], _value min 2, true];
 };
@@ -43,7 +43,7 @@ set_strength = {
 	missionNamespace setVariable [format ["%1_strength", _side], _value, true];
 }; 
 
-get_strength = {
+AW_get_strength = {
 	params ["_side"];
 	missionNamespace getVariable format ["%1_strength",  _side];
 };

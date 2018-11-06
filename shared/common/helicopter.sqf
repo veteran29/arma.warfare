@@ -1,8 +1,8 @@
-spawn_helicopter = {
+AW_spawn_helicopter = {
 	params ["_side", "_helicopter"];
 
-	private _pos = getMarkerPos ([_side, respawn_air] call get_prefixed_name);
-	private _base_pos = getMarkerPos ([_side, respawn_ground] call get_prefixed_name);
+	private _pos = getMarkerPos ([_side, respawn_air] call AW_get_prefixed_name);
+	private _base_pos = getMarkerPos ([_side, respawn_ground] call AW_get_prefixed_name);
 	private _dir = _pos getDir _base_pos;
 	private _pos = [_pos select 0, _pos select 1, (_pos select 2) + 100];
 
@@ -29,7 +29,7 @@ spawn_transport_heli = {
 
 	private _arr = selectRandom (_side call get_transport_heli_type);	
 	private _class_name = _arr select 0;		
-    private _veh = [_side, _class_name] call spawn_helicopter;
+    private _veh = [_side, _class_name] call AW_spawn_helicopter;
 
 	private _group = _veh select 2;
 	
@@ -68,11 +68,11 @@ toggle_damage_while_landing = {
 	_veh allowDamage true;
 };
 
-take_off_and_despawn = {
+AW_take_off_and_despawn = {
 	params ["_heli_group", "_heli_vehicle"];
 	
 	private _side = side _heli_group;
-	private _pos = getMarkerPos ([_side, respawn_air] call get_prefixed_name);
+	private _pos = getMarkerPos ([_side, respawn_air] call AW_get_prefixed_name);
 
 	_heli_group addWaypoint [_pos, 100];
 	
